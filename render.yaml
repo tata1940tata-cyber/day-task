@@ -1,0 +1,13 @@
+services:
+  - type: static_site
+    name: day-task
+    plan: free
+    buildCommand: |
+      git clone https://github.com/flutter/flutter.git -b stable --depth 1
+      export PATH="$PWD/flutter/bin:$PATH"
+      flutter pub get
+      flutter build web --release
+    staticPublishPath: build/web
+    routes:
+      - type: catchAll
+        destination: /
